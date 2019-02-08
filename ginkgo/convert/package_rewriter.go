@@ -10,8 +10,7 @@ import (
 	"regexp"
 )
 
-/*
- * RewritePackage takes a name (eg: my-package/tools), finds its test files using
+/* RewritePackage takes a name (eg: my-package/tools), finds its test files using
  * Go's build package, and then rewrites them. A ginkgo test suite file will
  * also be added for this package, and all of its child packages.
  */
@@ -27,8 +26,7 @@ func RewritePackage(packageName string) {
 	return
 }
 
-/*
- * Given a package, findTestsInPackage reads the test files in the directory,
+/* findTestsInPackage; Given a package, findTestsInPackage reads the test files in the directory,
  * and then recurses on each child package, returning a slice of all test files
  * found in this process.
  */
@@ -67,8 +65,7 @@ func findTestsInPackage(pkg *build.Package) (testfiles []string) {
 	return
 }
 
-/*
- * Shells out to `ginkgo bootstrap` to create a test suite file
+/* addGinkgoSuiteForPackage shells out to `ginkgo bootstrap` to create a test suite file
  */
 func addGinkgoSuiteForPackage(pkg *build.Package) {
 	originalDir, err := os.Getwd()
@@ -100,8 +97,7 @@ func addGinkgoSuiteForPackage(pkg *build.Package) {
 	}
 }
 
-/*
- * Shells out to `go fmt` to format the package
+/* goFmtPackage shells out to `go fmt` to format the package
  */
 func goFmtPackage(pkg *build.Package) {
 	output, err := exec.Command("go", "fmt", pkg.ImportPath).Output()
@@ -111,8 +107,7 @@ func goFmtPackage(pkg *build.Package) {
 	}
 }
 
-/*
- * Attempts to return a package with its test files already read.
+/* packageWithName attempts to return a package with its test files already read.
  * The ImportMode arg to build.Import lets you specify if you want go to read the
  * buildable go files inside the package, but it fails if the package has no go files
  */

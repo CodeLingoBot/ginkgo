@@ -83,7 +83,7 @@ func GinkgoParallelNode() int {
 	return config.GinkgoConfig.ParallelNode
 }
 
-//Some matcher libraries or legacy codebases require a *testing.T
+// GinkgoT; Some matcher libraries or legacy codebases require a *testing.T
 //GinkgoT implements an interface analogous to *testing.T and can be used if
 //the library in question accepts *testing.T through an interface
 //
@@ -154,7 +154,7 @@ type GinkgoTestDescription struct {
 	Duration time.Duration
 }
 
-//CurrentGinkgoTestDescripton returns information about the current running test.
+// CurrentGinkgoTestDescription returns information about the current running test.
 func CurrentGinkgoTestDescription() GinkgoTestDescription {
 	summary, ok := globalSuite.CurrentRunningSpecSummary()
 	if !ok {
@@ -202,14 +202,14 @@ func RunSpecs(t GinkgoTestingT, description string) bool {
 	return RunSpecsWithCustomReporters(t, description, specReporters)
 }
 
-//To run your tests with Ginkgo's default reporter and your custom reporter(s), replace
+// RunSpecsWithDefaultAndCustomReporters; To run your tests with Ginkgo's default reporter and your custom reporter(s), replace
 //RunSpecs() with this method.
 func RunSpecsWithDefaultAndCustomReporters(t GinkgoTestingT, description string, specReporters []Reporter) bool {
 	specReporters = append(specReporters, buildDefaultReporter())
 	return RunSpecsWithCustomReporters(t, description, specReporters)
 }
 
-//To run your tests with your custom reporter(s) (and *not* Ginkgo's default reporter), replace
+// RunSpecsWithCustomReporters; To run your tests with your custom reporter(s) (and *not* Ginkgo's default reporter), replace
 //RunSpecs() with this method.  Note that parallel tests will not work correctly without the default reporter
 func RunSpecsWithCustomReporters(t GinkgoTestingT, description string, specReporters []Reporter) bool {
 	writer := GinkgoWriter.(*writer.Writer)
@@ -290,19 +290,19 @@ func Describe(text string, body func()) bool {
 	return true
 }
 
-//You can focus the tests within a describe block using FDescribe
+// FDescribe; You can focus the tests within a describe block using FDescribe
 func FDescribe(text string, body func()) bool {
 	globalSuite.PushContainerNode(text, body, types.FlagTypeFocused, codelocation.New(1))
 	return true
 }
 
-//You can mark the tests within a describe block as pending using PDescribe
+// PDescribe; You can mark the tests within a describe block as pending using PDescribe
 func PDescribe(text string, body func()) bool {
 	globalSuite.PushContainerNode(text, body, types.FlagTypePending, codelocation.New(1))
 	return true
 }
 
-//You can mark the tests within a describe block as pending using XDescribe
+// XDescribe; You can mark the tests within a describe block as pending using XDescribe
 func XDescribe(text string, body func()) bool {
 	globalSuite.PushContainerNode(text, body, types.FlagTypePending, codelocation.New(1))
 	return true
@@ -319,19 +319,19 @@ func Context(text string, body func()) bool {
 	return true
 }
 
-//You can focus the tests within a describe block using FContext
+// FContext; You can focus the tests within a describe block using FContext
 func FContext(text string, body func()) bool {
 	globalSuite.PushContainerNode(text, body, types.FlagTypeFocused, codelocation.New(1))
 	return true
 }
 
-//You can mark the tests within a describe block as pending using PContext
+// PContext; You can mark the tests within a describe block as pending using PContext
 func PContext(text string, body func()) bool {
 	globalSuite.PushContainerNode(text, body, types.FlagTypePending, codelocation.New(1))
 	return true
 }
 
-//You can mark the tests within a describe block as pending using XContext
+// XContext; You can mark the tests within a describe block as pending using XContext
 func XContext(text string, body func()) bool {
 	globalSuite.PushContainerNode(text, body, types.FlagTypePending, codelocation.New(1))
 	return true
@@ -348,19 +348,19 @@ func When(text string, body func()) bool {
 	return true
 }
 
-//You can focus the tests within a describe block using FWhen
+// FWhen; You can focus the tests within a describe block using FWhen
 func FWhen(text string, body func()) bool {
 	globalSuite.PushContainerNode("when "+text, body, types.FlagTypeFocused, codelocation.New(1))
 	return true
 }
 
-//You can mark the tests within a describe block as pending using PWhen
+// PWhen; You can mark the tests within a describe block as pending using PWhen
 func PWhen(text string, body func()) bool {
 	globalSuite.PushContainerNode("when "+text, body, types.FlagTypePending, codelocation.New(1))
 	return true
 }
 
-//You can mark the tests within a describe block as pending using XWhen
+// XWhen; You can mark the tests within a describe block as pending using XWhen
 func XWhen(text string, body func()) bool {
 	globalSuite.PushContainerNode("when "+text, body, types.FlagTypePending, codelocation.New(1))
 	return true
@@ -376,19 +376,19 @@ func It(text string, body interface{}, timeout ...float64) bool {
 	return true
 }
 
-//You can focus individual Its using FIt
+// FIt; You can focus individual Its using FIt
 func FIt(text string, body interface{}, timeout ...float64) bool {
 	globalSuite.PushItNode(text, body, types.FlagTypeFocused, codelocation.New(1), parseTimeout(timeout...))
 	return true
 }
 
-//You can mark Its as pending using PIt
+// PIt; You can mark Its as pending using PIt
 func PIt(text string, _ ...interface{}) bool {
 	globalSuite.PushItNode(text, func() {}, types.FlagTypePending, codelocation.New(1), 0)
 	return true
 }
 
-//You can mark Its as pending using XIt
+// XIt; You can mark Its as pending using XIt
 func XIt(text string, _ ...interface{}) bool {
 	globalSuite.PushItNode(text, func() {}, types.FlagTypePending, codelocation.New(1), 0)
 	return true
@@ -402,19 +402,19 @@ func Specify(text string, body interface{}, timeout ...float64) bool {
 	return true
 }
 
-//You can focus individual Specifys using FSpecify
+// FSpecify; You can focus individual Specifys using FSpecify
 func FSpecify(text string, body interface{}, timeout ...float64) bool {
 	globalSuite.PushItNode(text, body, types.FlagTypeFocused, codelocation.New(1), parseTimeout(timeout...))
 	return true
 }
 
-//You can mark Specifys as pending using PSpecify
+// PSpecify; You can mark Specifys as pending using PSpecify
 func PSpecify(text string, is ...interface{}) bool {
 	globalSuite.PushItNode(text, func() {}, types.FlagTypePending, codelocation.New(1), 0)
 	return true
 }
 
-//You can mark Specifys as pending using XSpecify
+// XSpecify; You can mark Specifys as pending using XSpecify
 func XSpecify(text string, is ...interface{}) bool {
 	globalSuite.PushItNode(text, func() {}, types.FlagTypePending, codelocation.New(1), 0)
 	return true
@@ -451,19 +451,19 @@ func Measure(text string, body interface{}, samples int) bool {
 	return true
 }
 
-//You can focus individual Measures using FMeasure
+// FMeasure; You can focus individual Measures using FMeasure
 func FMeasure(text string, body interface{}, samples int) bool {
 	globalSuite.PushMeasureNode(text, body, types.FlagTypeFocused, codelocation.New(1), samples)
 	return true
 }
 
-//You can mark Maeasurements as pending using PMeasure
+// PMeasure; You can mark Maeasurements as pending using PMeasure
 func PMeasure(text string, _ ...interface{}) bool {
 	globalSuite.PushMeasureNode(text, func(b Benchmarker) {}, types.FlagTypePending, codelocation.New(1), 0)
 	return true
 }
 
-//You can mark Maeasurements as pending using XMeasure
+// XMeasure; You can mark Maeasurements as pending using XMeasure
 func XMeasure(text string, _ ...interface{}) bool {
 	globalSuite.PushMeasureNode(text, func(b Benchmarker) {}, types.FlagTypePending, codelocation.New(1), 0)
 	return true

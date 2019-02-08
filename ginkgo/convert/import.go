@@ -6,8 +6,7 @@ import (
 	"go/ast"
 )
 
-/*
- * Given the root node of an AST, returns the node containing the
+/* importsForRootNode; Given the root node of an AST, returns the node containing the
  * import statements for the file.
  */
 func importsForRootNode(rootNode *ast.File) (imports *ast.GenDecl, err error) {
@@ -28,8 +27,7 @@ func importsForRootNode(rootNode *ast.File) (imports *ast.GenDecl, err error) {
 	return
 }
 
-/*
- * Removes "testing" import, if present
+/* removeTestingImport removes "testing" import, if present
  */
 func removeTestingImport(rootNode *ast.File) {
 	importDecl, err := importsForRootNode(rootNode)
@@ -49,8 +47,7 @@ func removeTestingImport(rootNode *ast.File) {
 	importDecl.Specs = append(importDecl.Specs[:index], importDecl.Specs[index+1:]...)
 }
 
-/*
- * Adds import statements for onsi/ginkgo, if missing
+/* addGinkgoImports adds import statements for onsi/ginkgo, if missing
  */
 func addGinkgoImports(rootNode *ast.File) {
 	importDecl, err := importsForRootNode(rootNode)
@@ -80,8 +77,7 @@ func addGinkgoImports(rootNode *ast.File) {
 	}
 }
 
-/*
- * convenience function to create an import statement
+/* createImport; convenience function to create an import statement
  */
 func createImport(name, path string) *ast.ImportSpec {
 	return &ast.ImportSpec{

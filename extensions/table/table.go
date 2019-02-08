@@ -46,24 +46,21 @@ func DescribeTable(description string, itBody interface{}, entries ...TableEntry
 	return true
 }
 
-/*
-You can focus a table with `FDescribeTable`.  This is equivalent to `FDescribe`.
+/* FDescribeTable; You can focus a table with `FDescribeTable`.  This is equivalent to `FDescribe`.
 */
 func FDescribeTable(description string, itBody interface{}, entries ...TableEntry) bool {
 	describeTable(description, itBody, entries, false, true)
 	return true
 }
 
-/*
-You can mark a table as pending with `PDescribeTable`.  This is equivalent to `PDescribe`.
+/* PDescribeTable; You can mark a table as pending with `PDescribeTable`.  This is equivalent to `PDescribe`.
 */
 func PDescribeTable(description string, itBody interface{}, entries ...TableEntry) bool {
 	describeTable(description, itBody, entries, true, false)
 	return true
 }
 
-/*
-You can mark a table as pending with `XDescribeTable`.  This is equivalent to `XDescribe`.
+/* XDescribeTable; You can mark a table as pending with `XDescribeTable`.  This is equivalent to `XDescribe`.
 */
 func XDescribeTable(description string, itBody interface{}, entries ...TableEntry) bool {
 	describeTable(description, itBody, entries, true, false)

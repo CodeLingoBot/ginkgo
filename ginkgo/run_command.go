@@ -140,7 +140,7 @@ func (r *SpecRunner) RunSpecs(args []string, additionalArgs []string) {
 	}
 }
 
-// Moves all generated profiles to specified directory
+// moveCoverprofiles moves all generated profiles to specified directory
 func (r *SpecRunner) moveCoverprofiles(runners []*testrunner.TestRunner) {
 	for _, runner := range runners {
 		_, filename := filepath.Split(runner.CoverageFile)
@@ -153,7 +153,7 @@ func (r *SpecRunner) moveCoverprofiles(runners []*testrunner.TestRunner) {
 	}
 }
 
-// Combines all generated profiles in the specified directory
+// combineCoverprofiles combines all generated profiles in the specified directory
 func (r *SpecRunner) combineCoverprofiles(runners []*testrunner.TestRunner) error {
 
 	path, _ := filepath.Abs(r.getOutputDir())

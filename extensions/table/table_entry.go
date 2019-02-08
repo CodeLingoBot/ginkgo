@@ -59,22 +59,19 @@ func Entry(description string, parameters ...interface{}) TableEntry {
 	return TableEntry{description, parameters, false, false}
 }
 
-/*
-You can focus a particular entry with FEntry.  This is equivalent to FIt.
+/* FEntry; You can focus a particular entry with FEntry.  This is equivalent to FIt.
 */
 func FEntry(description string, parameters ...interface{}) TableEntry {
 	return TableEntry{description, parameters, false, true}
 }
 
-/*
-You can mark a particular entry as pending with PEntry.  This is equivalent to PIt.
+/* PEntry; You can mark a particular entry as pending with PEntry.  This is equivalent to PIt.
 */
 func PEntry(description string, parameters ...interface{}) TableEntry {
 	return TableEntry{description, parameters, true, false}
 }
 
-/*
-You can mark a particular entry as pending with XEntry.  This is equivalent to XIt.
+/* XEntry; You can mark a particular entry as pending with XEntry.  This is equivalent to XIt.
 */
 func XEntry(description string, parameters ...interface{}) TableEntry {
 	return TableEntry{description, parameters, true, false}

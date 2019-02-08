@@ -4,8 +4,7 @@ import (
 	"go/ast"
 )
 
-/*
- * Rewrites any other top level funcs that receive a *testing.T param
+/* rewriteOtherFuncsToUseGinkgoT rewrites any other top level funcs that receive a *testing.T param
  */
 func rewriteOtherFuncsToUseGinkgoT(declarations []ast.Decl) {
 	for _, decl := range declarations {
@@ -39,8 +38,7 @@ func rewriteOtherFuncsToUseGinkgoT(declarations []ast.Decl) {
 	}
 }
 
-/*
- * Walks all of the nodes in the file, replacing *testing.T in struct
+/* walkNodesInRootNodeReplacingTestingT walks all of the nodes in the file, replacing *testing.T in struct
  * and func literal nodes. eg:
  *   type foo struct { *testing.T }
  *   var bar = func(t *testing.T) { }
@@ -62,8 +60,7 @@ func walkNodesInRootNodeReplacingTestingT(rootNode *ast.File) {
 	})
 }
 
-/*
- * replaces named *testing.T inside a composite literal
+/* replaceNamedTestingTsInKeyValueExpression replaces named *testing.T inside a composite literal
  */
 func replaceNamedTestingTsInKeyValueExpression(kve *ast.KeyValueExpr, testingT string) {
 	ident, ok := kve.Value.(*ast.Ident)
@@ -76,8 +73,7 @@ func replaceNamedTestingTsInKeyValueExpression(kve *ast.KeyValueExpr, testingT s
 	}
 }
 
-/*
- * replaces *testing.T params in a func literal with GinkgoT
+/* replaceTypeDeclTestingTsInFuncLiteral replaces *testing.T params in a func literal with GinkgoT
  */
 func replaceTypeDeclTestingTsInFuncLiteral(functionLiteral *ast.FuncLit) {
 	for _, arg := range functionLiteral.Type.Params.List {
@@ -102,8 +98,7 @@ func replaceTypeDeclTestingTsInFuncLiteral(functionLiteral *ast.FuncLit) {
 	}
 }
 
-/*
- * Replaces *testing.T types inside of a struct declaration with a GinkgoT
+/* replaceTestingTsInStructType replaces *testing.T types inside of a struct declaration with a GinkgoT
  * eg: type foo struct { *testing.T }
  */
 func replaceTestingTsInStructType(structType *ast.StructType) {

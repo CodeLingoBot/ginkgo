@@ -11,8 +11,7 @@ import (
 	"os"
 )
 
-/*
- * Given a file path, rewrites any tests in the Ginkgo format.
+/* rewriteTestsInFile; Given a file path, rewrites any tests in the Ginkgo format.
  * First, we parse the AST, and update the imports declaration.
  * Then, we walk the first child elements in the file, returning tests to rewrite.
  * A top level init func is declared, with a single Describe func inside.
@@ -64,8 +63,7 @@ func rewriteTestsInFile(pathToFile string) {
 	return
 }
 
-/*
- * Given a test func named TestDoesSomethingNeat, rewrites it as
+/* rewriteTestFuncAsItStatement; Given a test func named TestDoesSomethingNeat, rewrites it as
  * It("does something neat", func() { __test_body_here__ }) and adds it
  * to the Describe's list of statements
  */
@@ -91,8 +89,7 @@ func rewriteTestFuncAsItStatement(testFunc *ast.FuncDecl, rootNode *ast.File, de
 	return
 }
 
-/*
- * walks nodes inside of a test func's statements and replaces the usage of
+/* replaceTestingTsWithGinkgoT walks nodes inside of a test func's statements and replaces the usage of
  * it's named *testing.T param with GinkgoT's
  */
 func replaceTestingTsWithGinkgoT(statementsBlock *ast.BlockStmt, testingT string) {
@@ -128,8 +125,7 @@ func replaceTestingTsWithGinkgoT(statementsBlock *ast.BlockStmt, testingT string
 	})
 }
 
-/*
- * rewrite t.Fail() or any other *testing.T method by replacing with T().Fail()
+/* replaceTestingTsMethodCalls; rewrite t.Fail() or any other *testing.T method by replacing with T().Fail()
  * This function receives a selector expression (eg: t.Fail()) and
  * the name of the *testing.T param from the function declaration. Rewrites the
  * selector expression in place if the target was a *testing.T
@@ -145,8 +141,7 @@ func replaceTestingTsMethodCalls(selectorExpr *ast.SelectorExpr, testingT string
 	}
 }
 
-/*
- * replaces usages of a named *testing.T param inside of a call expression
+/* replaceTestingTsInArgsLists replaces usages of a named *testing.T param inside of a call expression
  * with a new GinkgoT object
  */
 func replaceTestingTsInArgsLists(callExpr *ast.CallExpr, testingT string) {
